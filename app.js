@@ -1,35 +1,32 @@
 /**
- * Loja de Computador ERP - Visual Hacker
- * Lightweight ERP for products (student project style comments included)
+ 
  *
- * How to run:
+ * como rodar:
  *   npm install
  *   npm start
- * Open: http://localhost:4000
+ * abrir no chrome: http://localhost:4000
  *
- * Author: Student (university project) - simple CRUD with SQLite
+ * autor: Joao Gabriel rgm 36044008 simples CRUD com SQLite
  */
 
-// Import modules
-const express = require('express'); // web framework
-const bodyParser = require('body-parser'); // parse form data
-const sqlite3 = require('sqlite3').verbose(); // lightweight DB
+// Importar
+const express = require('express'); 
+const bodyParser = require('body-parser'); 
+const sqlite3 = require('sqlite3').verbose(); 
 const path = require('path');
 
-// Create app and config
+// Crear app e configurar
 const app = express();
-const PORT = process.env.PORT || 4000; // using port 4000 as requested
+const PORT = process.env.PORT || 4000; // usar porta 4000
 const DB_FILE = path.join(__dirname, 'db.sqlite');
 
-// Set view engine and middleware
+// Configurar mecanismo de visualização 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// --- Database initialization ---
-// NOTE: This is a simple local DB for the student project.
-// In production we would use migrations and a proper DB server.
+// --- Inicialização do banco de dados ---
 const db = new sqlite3.Database(DB_FILE, (err) => {
   if (err) {
     console.error('Erro ao abrir banco de dados:', err);
@@ -38,7 +35,7 @@ const db = new sqlite3.Database(DB_FILE, (err) => {
 });
 
 db.serialize(() => {
-  // create table if not exists
+  // criar tabela se não existir
   db.run(`CREATE TABLE IF NOT EXISTS produtos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL,
@@ -48,11 +45,8 @@ db.serialize(() => {
   );`);
 });
 
-// --- Routes ---
-
-// Dashboard (simple stats)
-// This endpoint gathers count, total stock and total value.
-// For a student project it's acceptable to run three queries sequentially.
+// Painel (estatísticas simples)
+// Este endpoint coleta a contagem, o estoque total e o valor total.
 app.get('/', (req, res) => {
   db.serialize(() => {
     db.get('SELECT COUNT(*) as total FROM produtos', (err, trow) => {
@@ -74,7 +68,7 @@ app.get('/', (req, res) => {
   });
 });
 
-// List products with simple search
+// Liste produtos com pesquisa simples
 app.get('/produtos', (req, res) => {
   const q = req.query.q || '';
   const params = [];
@@ -90,12 +84,12 @@ app.get('/produtos', (req, res) => {
   });
 });
 
-// Show new product form
+// Novo formulario
 app.get('/produtos/novo', (req, res) => {
   res.render('form', { produto: null });
 });
 
-// Create product - simple insertion
+// criar produto
 app.post('/produtos', (req, res) => {
   const { nome, descricao, preco, quantidade } = req.body;
   db.run('INSERT INTO produtos (nome, descricao, preco, quantidade) VALUES (?, ?, ?, ?)',
@@ -106,7 +100,7 @@ app.post('/produtos', (req, res) => {
     });
 });
 
-// Edit product form - fetch by id
+// Formulário de edição do produto sendo ele buscar por ID
 app.get('/produtos/editar/:id', (req, res) => {
   const id = Number(req.params.id);
   db.get('SELECT * FROM produtos WHERE id = ?', [id], (err, row) => {
@@ -116,7 +110,7 @@ app.get('/produtos/editar/:id', (req, res) => {
   });
 });
 
-// Update product - apply changes
+//Atualizar produto 
 app.post('/produtos/editar/:id', (req, res) => {
   const id = Number(req.params.id);
   const { nome, descricao, preco, quantidade } = req.body;
@@ -128,7 +122,7 @@ app.post('/produtos/editar/:id', (req, res) => {
     });
 });
 
-// Delete product
+// Deletar produto
 app.post('/produtos/excluir/:id', (req, res) => {
   const id = Number(req.params.id);
   db.run('DELETE FROM produtos WHERE id = ?', [id], function(err) {
@@ -137,7 +131,7 @@ app.post('/produtos/excluir/:id', (req, res) => {
   });
 });
 
-// Simple API endpoint used for integration/testing
+// 
 app.get('/api/produtos', (req, res) => {
   db.all('SELECT * FROM produtos ORDER BY id DESC', [], (err, rows) => {
     if (err) return res.status(500).json({ error: 'DB error' });
@@ -145,5 +139,5 @@ app.get('/api/produtos', (req, res) => {
   });
 });
 
-// Start server
+// Startando o serve
 app.listen(PORT, () => console.log(`Servidor rodando em http://localhost:${PORT}`));
