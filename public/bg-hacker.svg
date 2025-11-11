@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" x2="1">
+      <stop offset="0" stop-color="#010306"/>
+      <stop offset="1" stop-color="#02101a"/>
+    </linearGradient>
+    <pattern id="wm" width="520" height="220" patternUnits="userSpaceOnUse" patternTransform="rotate(-18)">
+      <text x="0" y="110" font-family="Arial, Helvetica, monospace" font-size="48" fill="#0b2a1a" fill-opacity="0.06" font-weight="800">
+        LOJA DE PC VENHA JÁ — LOJA DE PC VENHA JÁ
+      </text>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bgGrad)"/>
+  <g font-family="monospace" font-size="12" fill="#083b1f" opacity="0.9">
+    <g transform="translate(40,40)">
+      <text x="0" y="0">for (let i = 0; i &lt; 100; i++) {</text>
+      <text x="0" y="20">  console.log("0x" + (i &lt;&lt; 2).toString(16));</text>
+      <text x="0" y="40">  // init module...</text>
+      <text x="0" y="60">}</text>
+    </g>
+    <g transform="translate(460,140)">
+      <text x="0" y="0">if (auth === true) {</text>
+      <text x="0" y="20">  load('kernel');</text>
+      <text x="0" y="40">  exec('handshake')</text>
+      <text x="0" y="60">}</text>
+    </g>
+  </g>
+  <!-- watermark overlay -->
+  <rect width="100%" height="100%" fill="url(#wm)"/>
+  <!-- soft color blobs -->
+  <ellipse cx="1400" cy="180" rx="420" ry="180" fill="#7c3aed" opacity="0.03"/>
+  <ellipse cx="300" cy="820" rx="520" ry="220" fill="#06b6d4" opacity="0.02"/>
+</svg>

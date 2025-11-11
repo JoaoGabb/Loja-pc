@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Loja de Computador — Painel</title>
+  <!-- student: basic layout using EJS and CSS -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="bg">
+  <div class="overlay"></div>
+  <header class="header">
+    <div class="brand">Loja de computador</div>
+    <nav><a href="/produtos">Produtos</a></nav>
+  </header>
+
+  <main class="main container">
+    <section class="stats">
+      <div class="card stat">
+        <div class="label">Total de produtos</div>
+        <div class="value"><%= stats.total %></div>
+      </div>
+      <div class="card stat">
+        <div class="label">Estoque total</div>
+        <div class="value"><%= stats.estoque %></div>
+      </div>
+      <div class="card stat">
+        <div class="label">Valor total (R$)</div>
+        <div class="value">R$ <%= stats.valor %></div>
+      </div>
+    </section>
+
+    <section class="recent">
+      <div class="card">
+        <h3>Atalhos</h3>
+        <div class="tiles">
+          <a class="tile" href="/produtos/novo">+ Novo produto</a>
+          <a class="tile" href="/produtos">Ver todos os produtos</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">Loja de Computador — ERP (projeto universitário)</footer>
+</body>
+</html>

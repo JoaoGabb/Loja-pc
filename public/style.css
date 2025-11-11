@@ -1,0 +1,71 @@
+
+/* Visual Hacker - Glass + Watermark theme */
+/* Student project: styles are simple and commented */
+
+/* color variables */
+:root{
+  --bg-dark:#02050a;
+  --muted:#9ca3af;
+  --accent1:#7c3aed;
+  --accent2:#06b6d4;
+  --neon:#00ff88;
+}
+
+/* base layout */
+*{box-sizing:border-box;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif}
+html,body{height:100%;margin:0;background:var(--bg-dark);color:#e6eef8}
+
+/* full-screen background with watermark (covers entire viewport) */
+.bg{background: url('/bg-hacker.svg') center/cover no-repeat fixed; min-height:100vh;}
+
+/* subtle overlay to darken and give contrast */
+.overlay{position:fixed;inset:0;background:linear-gradient(180deg, rgba(2,6,23,0.45), rgba(2,6,23,0.6));pointer-events:none;z-index:1}
+
+/* header/navbar */
+.header{display:flex;justify-content:space-between;align-items:center;padding:18px 32px;color:var(--neon);position:relative;z-index:3}
+.brand{font-weight:700;letter-spacing:0.6px}
+.header nav a{color:var(--muted);text-decoration:none;margin-left:12px;padding:6px 10px;border-radius:8px;}
+
+/* main container sits above background */
+.container{max-width:1100px;margin:24px auto;padding:0 18px;position:relative;z-index:3}
+
+/* cards and glass effect */
+.card{background:linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));backdrop-filter: blur(10px);border-radius:12px;padding:18px;box-shadow:0 14px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.04)}
+
+/* stats layout */
+.stats{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+.stat{flex:1;min-width:200px}
+.stat .label{color:var(--muted);font-size:13px}
+.stat .value{font-size:26px;font-weight:700;color:var(--accent2);margin-top:6px}
+
+/* toolbar and search */
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.search input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;width:420px}
+.btn{padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:inherit;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:transform .10s ease,box-shadow .15s}
+.btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white;border:none;box-shadow:0 10px 30px rgba(124,58,237,0.12)}
+.btn.small{padding:6px 10px;font-size:13px;border-radius:8px;min-width:72px}
+.btn.danger{background:linear-gradient(90deg,#ef4444,#e11d48);color:white;border:none;box-shadow:0 8px 20px rgba(225,29,72,0.12)}
+.btn:hover{transform:translateY(-2px);opacity:0.98}
+.btn:active{transform:translateY(0);opacity:0.95}
+
+/* table styles */
+.prod-table{width:100%;border-collapse:collapse;margin-top:8px}
+.prod-table th,.prod-table td{padding:14px 12px;border-bottom:1px solid rgba(255,255,255,0.03);text-align:left}
+.prod-table th{color:var(--muted);font-size:13px;background:transparent}
+.actions-inline{display:inline-flex;gap:8px;align-items:center}
+
+/* form */
+.form-card{max-width:760px;margin:0 auto}
+.row{margin-bottom:10px;display:flex;flex-direction:column}
+.row.cols{display:flex;gap:12px}
+textarea{min-height:90px;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+.actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+
+/* footer */
+.footer{max-width:1100px;margin:28px auto;color:var(--muted);font-size:13px;padding:0 18px}
+
+/* responsiveness */
+@media (max-width:700px){
+  .stats{flex-direction:column}
+  .search input{width:100%}
+}

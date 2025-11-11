@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Produtos — Loja de Computador</title>
+  <!-- student: product list template -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="bg">
+  <div class="overlay"></div>
+  <header class="header">
+    <div class="brand">Loja de computador</div>
+    <nav><a href="/">Dashboard</a></nav>
+  </header>
+
+  <main class="container main">
+    <div class="toolbar">
+      <form method="get" action="/produtos" class="search"><input name="q" placeholder="Buscar por nome, descrição ou id" value="<%= q %>"/><button class="btn">Buscar</button></form>
+      <a href="/produtos/novo" class="btn primary">+ Novo Produto</a>
+    </div>
+
+    <div class="card">
+      <table class="prod-table">
+        <thead><tr><th>ID</th><th>Nome</th><th>Descrição</th><th>Preço</th><th>Estoque</th><th>Ações</th></tr></thead>
+        <tbody>
+          <% if (produtos.length===0) { %>
+            <tr><td colspan="6" class="muted">Nenhum produto cadastrado</td></tr>
+          <% } %>
+          <% produtos.forEach(p=>{ %>
+            <tr>
+              <td><%= p.id %></td>
+              <td><%= p.nome %></td>
+              <td><%= p.descricao ? (p.descricao.length>80 ? p.descricao.substring(0,80)+'...' : p.descricao) : '-' %></td>
+              <td>R$ <%= Number(p.preco).toFixed(2) %></td>
+              <td><%= p.quantidade %></td>
+              <td>
+                <div class="actions-inline">
+                  <a class="btn small" href="/produtos/editar/<%= p.id %>">Editar</a>
+                  <form method="post" action="/produtos/excluir/<%= p.id %>" style="display:inline" onsubmit="return confirm('Excluir?')">
+                    <button class="btn danger small" type="submit">Excluir</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="footer">Loja de Computador — ERP (projeto universitário)</footer>
+</body>
+</html>
